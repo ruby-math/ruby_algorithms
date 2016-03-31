@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'lib/algorithms'
+puts Algorithms.hi(ARGV[0])
