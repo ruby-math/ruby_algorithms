@@ -1,4 +1,3 @@
-require 'byebug'
 class MergeSort
   attr_reader :array, :desc
   def initialize array, desc=false
@@ -23,12 +22,58 @@ class MergeSort
   end
 
   def merge_sort array, p, r
-    byebug
     if p < r
-      q = (p + r).floor
+      q = ((p + r) / 2).floor
       merge_sort(array, p, q)
-      merge_sort(array, q + 1, p)
+      merge_sort(array, q + 1, r)
+      merge(array, p, q, r)
     end
+  end
+
+  def merge array, p, q, r
+    n1 = q - p + 1
+    n2 = r - q
+    left_array = []
+    right_array = []
+
+    for i in 1..n1
+      left_array[i] = array[p + i - 1]
+    end
+
+    for j in 1..n2
+      right_array[j] = array[q + j]
+    end
+
+    i = 1
+    j = 1
+    for k in p..r
+
+      if i >= left_array.length && (j < right_array.length)
+        array[k] = right_array[j]
+        j = j + 1
+        next
+      elsif j >= right_array.length && (i < left_array.length)
+        array[k] = left_array[i]
+        i = i + 1
+        next
+      elsif j >= right_array.length && i >= left_array.length
+        break
+      end
+
+      comparison = is_desc? ? (left_array[i] >= right_array[j]) : (left_array[i] <= right_array[j])
+      if comparison
+        array[k] = left_array[i]
+        i = i + 1
+      else
+        array[k] = right_array[j]
+        j = j + 1
+      end
+    end
+  end
+
+  protected
+  def is_desc?
+    @desc
   end
 
 end

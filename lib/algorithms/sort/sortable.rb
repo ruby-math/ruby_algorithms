@@ -17,6 +17,10 @@ class Sortable
     @array = InsertionSort.order(@array, desc=@desc)
   end
 
+  def merge_sort!
+    @array = MergeSort.order(@array, desc= @desc)
+  end
+
   def equal? sortable
     unless sortable.is_a? Sortable
       return false

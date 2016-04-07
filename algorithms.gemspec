@@ -3,15 +3,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'algorithms/version'
 
 Gem::Specification.new do |s|
-  s.name = 'algorithms'
+  s.name = Algorithms::NAME
   s.version = Algorithms::VERSION
-  s.date = '2016-03-30'
-  s.summary = 'This gem includes the common data structures and algorithms.'
-  s.description = 'This gem includes the common data structures and algorithms.'
-  s.authors = ['Uchenna F. Okoye']
-  s.email = 'uchennafokoye@gmail.com'
-  s.homepage = 'http://rubygems.org/gems/algorithms'
-  s.license = 'MIT'
+  s.date = Algorithms::DATE
+  s.summary = Algorithms::SUMMARY
+  s.description = Algorithms::DESCRIPTION
+  s.authors = Algorithms::AUTHORS
+  s.email = Algorithms::EMAIL
+  s.homepage = Algorithms::HOMEPAGE
+  s.license = Algorithms::LICENSE
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if s.respond_to?(:metadata)
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|s|features)/}) }
   s.bindir        = "exe"
   s.executables   = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.require_paths = ["lib", "lib/algorithms", "lib/algorithms/sort"]
 
   s.add_development_dependency "bundler", "~> 1.10"
   s.add_development_dependency "rake", "~> 10.0"
@@ -31,4 +31,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest-reporters"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "byebug"
+  s.add_development_dependency "pry"
+  s.add_development_dependency "pry-rescue"
+
+
 end

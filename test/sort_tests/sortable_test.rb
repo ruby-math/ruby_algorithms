@@ -37,7 +37,6 @@ class SortableTest < Minitest::Test
   end
 
   def test_merge_sort
-    skip("To be implemented")
     @sortable.merge_sort!
     expected = Sortable.new [1, 2, 3, 4, 5, 6]
     assert_same(expected, @sortable)
