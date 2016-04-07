@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.description = 'This gem includes the common data structures and algorithms.'
   s.authors = ['Uchenna F. Okoye']
   s.email = 'uchennafokoye@gmail.com'
-  s.files = ['lib/algorithms.rb', 'lib/algorithms/data_structures']
   s.homepage = 'http://rubygems.org/gems/algorithms'
   s.license = 'MIT'
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or

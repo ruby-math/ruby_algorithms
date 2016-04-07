@@ -30,8 +30,15 @@ class SortableTest < Minitest::Test
     # @sortable.sort
   end
 
-  def test_insertion_sort_in_place
+  def test_insertion_sort
     @sortable.insertion_sort!
+    expected = Sortable.new [1, 2, 3, 4, 5, 6]
+    assert_same(expected, @sortable)
+  end
+
+  def test_merge_sort
+    skip("To be implemented")
+    @sortable.merge_sort!
     expected = Sortable.new [1, 2, 3, 4, 5, 6]
     assert_same(expected, @sortable)
   end

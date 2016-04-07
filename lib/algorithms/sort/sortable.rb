@@ -1,3 +1,5 @@
+require 'insertion_sort'
+require 'merge_sort'
 class Sortable
   attr_reader :array, :desc
   def initialize array, desc=false
@@ -11,25 +13,8 @@ class Sortable
     @desc = desc
   end
 
-  # You carry a pointer. This pointer indicates last sorted point
-  # You iterate backwards comparing new pointer (i) to all other array points (j)
-  # If it is less than/greater than, then place it in its rightful position
-  # For descending order, just do the opposite.
   def insertion_sort!
-    array = @array
-    for i in 1...array.length
-      current_no = array[i]
-      j = i - 1
-      while j >= 0
-        comparison = is_desc? ? (current_no > array[j]) : (current_no < array[j])
-        unless comparison
-          break
-        end
-        array[j+1] = array[j]
-        j = j - 1
-      end
-      array[j+1] = current_no
-    end
+    @array = InsertionSort.order(@array, desc=@desc)
   end
 
   def equal? sortable
@@ -43,6 +28,5 @@ class Sortable
   def is_desc?
     @desc
   end
-
 
 end
