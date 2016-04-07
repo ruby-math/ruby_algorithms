@@ -1,6 +1,8 @@
 require 'helpers/interface'
-require 'algorithms/sort/simple_sort'
-module Sort
-  include Interface
-  method :sort
+class Sort
+  include Comparable
+  include
+
+  def initialize
+  end
 end
