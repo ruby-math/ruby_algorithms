@@ -22,4 +22,13 @@ class MergeSortTest < Minitest::Test
     expected = [6, 5, 4, 3, 2, 1]
     assert_equal expected, actual
   end
+
+  def test_time_complexity_output
+    best = MergeSort::TIME_COMPLEXITY_BEST
+    worst =  MergeSort::TIME_COMPLEXITY_WORST
+    average = MergeSort::TIME_COMPLEXITY_AVERAGE
+    assert_equal("O(n log(n))", worst)
+    assert_equal("O(n log(n))", best)
+    assert_equal("O(n log(n))", average)
+  end
 end

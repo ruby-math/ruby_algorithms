@@ -1,4 +1,41 @@
 class MergeSort
+
+  # Important Characteristics
+  # 1. It follows the rule of Divide and Conquer
+  # 2. It is quite fast and has a time complexity of O(n log n)
+  # 3. It is Stable, as it does not change the relative order of elements with equal keys
+  # Example:
+  #     array = [3, 2, 4, 5, 6, 1]
+  #     array = MergeSort.order(array)
+  #     puts array # Output:  [1, 2, 3, 4, 5, 6]
+  # Example:
+  #     array = [3, 2, 4, 5, 6, 1]
+  #     array = MergeSort.order(array, :desc => true)
+  #     puts array # Output: [6, 5, 4, 3, 2, 1]
+  #
+  # OR
+  #
+  # Example:
+  #     array = [3, 2, 4, 5, 6, 1]
+  #     insertion = MergeSort.new(array)
+  #     puts insertion.array # Output: [1, 2, 3, 4, 5, 6]
+  #
+  # Example:
+  #     array = [3, 2, 4, 5, 6, 1]
+  #     insertion = MergeSort.new(array, :desc => true)
+  #     puts insertion.array # Output: [6, 5, 4, 3, 2, 1]
+  #
+  #
+  # ### Get Time Complexity:
+  # Example:
+  #     best = MergeSort::TIME_COMPLEXITY_BEST
+  #     worst = MergeSort::TIME_COMPLEXITY_WORST
+  #     average = MergeSort::TIME_COMPLEXITY_AVERAGE
+
+  TIME_COMPLEXITY_WORST = "O(n log(n))"
+  TIME_COMPLEXITY_AVERAGE = "O(n log(n))"
+  TIME_COMPLEXITY_BEST = "O(n log(n))"
+
   attr_reader :array, :desc
   def initialize array, desc=false
     unless array.is_a? Enumerable
@@ -13,10 +50,11 @@ class MergeSort
   end
 
   def self.order array, desc=false
-    instance = InsertionSort.new array, desc=desc
+    instance = MergeSort.new array, desc=desc
     instance.array
   end
 
+  protected
   def sort
     merge_sort @array, 0, array.length - 1
   end
@@ -71,7 +109,6 @@ class MergeSort
     end
   end
 
-  protected
   def is_desc?
     @desc
   end
