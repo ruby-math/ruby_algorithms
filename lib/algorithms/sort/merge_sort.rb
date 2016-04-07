@@ -1,9 +1,13 @@
 class MergeSort
 
   # Important Characteristics
-  # 1. It follows the rule of Divide and Conquer
-  # 2. It is quite fast and has a time complexity of O(n log n)
-  # 3. It is Stable, as it does not change the relative order of elements with equal keys
+  # 1. It is quite fast and has a time complexity of O(n log n)
+  # 2. Time complexity of Merge Sort is O (n log n) in all 3 cases (worst, average and best)
+  # as merge sort always divides the array in two halves and takes linear time to merge two halves
+  # 3. It requires equal amount of additional space as the unsorted lsit. Hence its not at all recommended for search large unsorted lists
+  # 4. It is the best Sorting technique for sorting Linked lists
+  # 5. It follows the rule of Divide and Conquer
+  # 6. It is Stable, as it does not change the relative order of elements with equal keys
   # Example:
   #     array = [3, 2, 4, 5, 6, 1]
   #     array = MergeSort.order(array)
@@ -31,10 +35,12 @@ class MergeSort
   #     best = MergeSort::TIME_COMPLEXITY_BEST
   #     worst = MergeSort::TIME_COMPLEXITY_WORST
   #     average = MergeSort::TIME_COMPLEXITY_AVERAGE
+  #     space = MergeSort::SPACE_COMPLEXITY
 
   TIME_COMPLEXITY_WORST = "O(n log(n))"
   TIME_COMPLEXITY_AVERAGE = "O(n log(n))"
   TIME_COMPLEXITY_BEST = "O(n log(n))"
+  SPACE_COMPLEXITY = "O(n)"
 
   attr_reader :array, :desc
   def initialize array, desc=false
