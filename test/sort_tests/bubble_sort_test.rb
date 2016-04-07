@@ -1,7 +1,7 @@
 require 'test_helper'
-require 'merge_sort'
+require 'bubble_sort'
 
-class MergeSortTest < Minitest::Test
+class BubbleSortTest < Minitest::Test
 
   def setup
     @array = [3, 2, 4, 5, 6, 1]
@@ -23,37 +23,35 @@ class MergeSortTest < Minitest::Test
   end
 
   def test_sort_ascending
-    actual = MergeSort.order(@array)
+    actual = BubbleSort.order(@array)
     expected = [1, 2, 3, 4, 5, 6]
     assert_equal expected, actual
   end
 
   def random_parameterized_test_asc
     test_case = @valid_arrays_asc[rand(0..@valid_arrays_asc.length)]
-    actual = MergeSort.order(test_case[:input])
+    actual = BubbleSort.order(test_case[:input])
     assert_equal(test_case[:output], actual)
   end
 
   def random_parameterized_test_desc
     test_case = @valid_arrays_desc[rand(0..@valid_arrays_desc.length)]
-    actual = MergeSort.new(test_case[:input], :desc => true)
+    actual = BubbleSort.new(test_case[:input], :desc => true)
     assert_equal(test_case[:output], actual)
   end
 
   def test_sort_descending
-    actual = MergeSort.order(@array, :desc => true)
+    actual = BubbleSort.order(@array, :desc => true)
     expected = [6, 5, 4, 3, 2, 1]
     assert_equal expected, actual
   end
 
   def test_time_complexity_output
-    best = MergeSort::TIME_COMPLEXITY_BEST
-    worst =  MergeSort::TIME_COMPLEXITY_WORST
-    average = MergeSort::TIME_COMPLEXITY_AVERAGE
-    space = MergeSort::SPACE_COMPLEXITY
-    assert_equal("O(n log(n))", worst)
-    assert_equal("O(n log(n))", best)
-    assert_equal("O(n log(n))", average)
-    assert_equal("O(n)", space)
+    best = BubbleSort::TIME_COMPLEXITY_BEST
+    worst =  BubbleSort::TIME_COMPLEXITY_WORST
+    average = BubbleSort::TIME_COMPLEXITY_AVERAGE
+    assert_equal("O(n^2)", worst)
+    assert_equal("O(n)", best)
+    assert_equal("O(n^2)", average)
   end
 end

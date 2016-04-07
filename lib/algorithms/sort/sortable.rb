@@ -1,5 +1,6 @@
 require 'insertion_sort'
 require 'merge_sort'
+require 'bubble_sort'
 class Sortable
   attr_reader :array, :desc
   def initialize array, desc=false
