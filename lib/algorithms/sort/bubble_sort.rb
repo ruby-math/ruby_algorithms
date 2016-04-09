@@ -1,3 +1,4 @@
+require 'sorting_interface'
 class BubbleSort
   # Important Characteristics
   # 1. Compares all the elements one by one and sort them based on their values
@@ -38,6 +39,7 @@ class BubbleSort
   #     worst = BubbleSort::TIME_COMPLEXITY_WORST
   #     average = BubbleSort::TIME_COMPLEXITY_AVERAGE
 
+  include SortingInterface
   TIME_COMPLEXITY_WORST = "O(n^2)"
   TIME_COMPLEXITY_AVERAGE = "O(n^2)"
   TIME_COMPLEXITY_BEST = "O(n)"
@@ -81,10 +83,5 @@ class BubbleSort
 
     end
   end
-
-    def swap array, i, j
-      array[i], array[j] = array[j], array[i]
-    end
-
 
 end
