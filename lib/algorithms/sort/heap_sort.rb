@@ -1,5 +1,4 @@
 require 'sorting_interface'
-require 'byebug'
 class HeapSort
   # Important Characteristics
   # 1. One of the best sorting methods being in-place and with no quadratic worst-case scenarios
