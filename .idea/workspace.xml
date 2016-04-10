@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb07803b-f7bb-4e7e-9991-20edfcf769e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/sort_tests/quick_sort_test.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/algorithms/sort/counting_sort.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/sort_tests/counting_sort_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.byebug_history" afterPath="$PROJECT_DIR$/.byebug_history" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/algorithms/sort/heap_sort.rb" afterPath="$PROJECT_DIR$/lib/algorithms/sort/heap_sort.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb" afterPath="$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb" />
     </list>
     <ignored path="data_structures_and_algorithms.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,16 +41,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rakefile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Rakefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="algorithms" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exe/algorithms">
           <provider selected="true" editor-type-id="text-editor">
@@ -70,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quick_sort_test.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="quick_sort_test.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/sort_tests/quick_sort_test.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6368715">
-              <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="34" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -83,8 +74,38 @@
       <file leaf-file-name="quick_sort.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.333333">
-              <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
+            <state vertical-scroll-proportion="-16.666666">
+              <caret line="30" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="106" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sortable.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/sortable.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="counting_sort_test.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/sort_tests/counting_sort_test.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="counting_sort.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/counting_sort.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3529412">
+              <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -158,8 +179,11 @@
         <option value="$PROJECT_DIR$/lib/algorithms/sort/bubble_sort.rb" />
         <option value="$PROJECT_DIR$/test/sort_tests/heap_sort_test.rb" />
         <option value="$PROJECT_DIR$/lib/algorithms/sort/heap_sort.rb" />
-        <option value="$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb" />
         <option value="$PROJECT_DIR$/test/sort_tests/quick_sort_test.rb" />
+        <option value="$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb" />
+        <option value="$PROJECT_DIR$/lib/algorithms/sort/count_sort.rb" />
+        <option value="$PROJECT_DIR$/test/sort_tests/counting_sort_test.rb" />
+        <option value="$PROJECT_DIR$/lib/algorithms/sort/counting_sort.rb" />
       </list>
     </option>
   </component>
@@ -169,8 +193,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="722" />
-    <option name="width" value="718" />
+    <option name="x" value="447" />
+    <option name="width" value="993" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -521,10 +545,10 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="722" y="0" width="718" height="900" extended-state="0" />
+    <frame x="447" y="0" width="993" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.025236594" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -579,6 +603,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="14" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -811,13 +836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/sortable.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44692737">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/helpers/interface.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1396648">
@@ -911,18 +929,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb">
+    <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/sortable.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.333333">
-          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/sort_tests/quick_sort_test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6368715">
-          <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/quick_sort.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.666666">
+          <caret line="30" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="106" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/sort_tests/counting_sort_test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/algorithms/sort/counting_sort.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3529412">
+          <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
           <folding />
         </state>
       </provider>
