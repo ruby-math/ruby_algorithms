@@ -1,18 +1,10 @@
 require 'sorting_interface'
 class CountingSort
   # Important Characteristics
-  # 1. Worst case is O(n ^ 2) but typically runs O (n log n)
-  # 2. Not stable sort so it might change the occurence of two similar elements
-  # in the list while sorting
-  # 3. Can be very fast and requires very less additional space
-  # 4. The algorithm divides the list into three main parts:
-  #   - Elements less than the Pivot element
-  #   - Pivot element
-  #   - Elements greater than the pivot element
-  # 5. Techniques Used:
-  #    - Divide and conquer
-  #    - Recursion
-  #    - Array
+  # 1. Must have values between (0, k) where k is larger than every value in the array
+  # 2. Counting sort is extremely fast -- Theta(k + n),  O(n) for worst case, best case and average
+  # 3. Uses spaces O(k + n)
+  # 4. Uses spaces O(k + n)
   # Example:
   #     array = [3, 2, 4, 5, 6, 1]
   #     array = CountingSort.order(array)
@@ -52,13 +44,15 @@ class CountingSort
 
   # For more on k variable, read on counting sort
   # k indicates that every number in the container is in the range (0, k)
-  # where k is smaller than n, the container length
   def initialize array, k, desc=false
     unless array.is_a? Enumerable
       raise "Please provide an array or other Enumerable"
     end
     unless (array.all? {|item| item.is_a? Comparable})
       raise "All objects must implement Comparable"
+    end
+    unless (array.all? {|item| item >= 0 && item < k})
+      raise "All items in array must be greater than or equal to 0 and less than k"
     end
     @array = array
     @desc = desc
@@ -80,8 +74,6 @@ class CountingSort
   def is_desc?
     @desc
   end
-
-
 
   def counting_sort array, k
     n = array.length

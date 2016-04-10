@@ -16,10 +16,26 @@ class CountingSortTest < Minitest::Test
         { input: [9, 2, 4, 5, 6, 1], output: [9, 6, 5, 4, 2, 1] },
         { input: [0, 2, 4, 5, 6, 1], output: [6, 5, 4, 2, 1, 0] }
     ]
+
+    @invalid_array_with_negative_number = [-5, 03, 16, 02, 10, 14]
   end
 
   def teardown
     # Do nothing
+  end
+
+  def test_that_it_gives_error_with_negative_number
+    assert_raises RuntimeError do
+      CountingSort.order(@invalid_array_with_negative_number, 17)
+    end
+  end
+
+  def test_that_it_gives_error_if_value_in_array_is_greater_than_or_equal_to_k
+    array = [05, 03, 16, 02, 10, 17]
+    k = 17
+    assert_raises RuntimeError do
+      CountingSort.order(array, k)
+    end
   end
 
   def test_sort_ascending
