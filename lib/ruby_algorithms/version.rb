@@ -1,5 +1,5 @@
-module Algorithms
-  VERSION = "0.0.1"
+module RubyAlgorithms
+  VERSION = "0.0.1.pre"
   NAME = "Algorithms"
   SUMMARY = 'This gem includes the common data structures and algorithms.'
   DESCRIPTION = 'This gem includes the common data structures and algorithms.'
