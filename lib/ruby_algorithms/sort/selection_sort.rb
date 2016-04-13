@@ -92,7 +92,6 @@ class SelectionSort
     comparison_symbol = find_max ? :> : :<
     container[left..right].each_with_index do |item, index|
       if item.send(comparison_symbol, container[selected])
-        selected_item = container[selected]
         selected = index + left
       end
     end
