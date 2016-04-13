@@ -3,15 +3,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'algorithms/version'
 
 Gem::Specification.new do |s|
-  s.name = Algorithms::NAME
-  s.version = Algorithms::VERSION
-  s.date = Algorithms::DATE
-  s.summary = Algorithms::SUMMARY
-  s.description = Algorithms::DESCRIPTION
-  s.authors = Algorithms::AUTHORS
-  s.email = Algorithms::EMAIL
-  s.homepage = Algorithms::HOMEPAGE
-  s.license = Algorithms::LICENSE
+  s.name = RubyAlgorithms::NAME
+  s.version = RubyAlgorithms::VERSION
+  s.date = RubyAlgorithms::DATE
+  s.summary = RubyAlgorithms::SUMMARY
+  s.description = RubyAlgorithms::DESCRIPTION
+  s.authors = RubyAlgorithms::AUTHORS
+  s.email = RubyAlgorithms::EMAIL
+  s.homepage = RubyAlgorithms::HOMEPAGE
+  s.license = RubyAlgorithms::LICENSE
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if s.respond_to?(:metadata)

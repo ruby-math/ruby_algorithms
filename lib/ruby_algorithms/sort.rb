@@ -1,5 +1,5 @@
 require 'helpers/interface'
-require 'algorithms/sort/sortable'
+require 'ruby_algorithms/sort/sortable'
 class Sort
   def initialize
   end
