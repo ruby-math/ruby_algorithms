@@ -1,6 +1,6 @@
 module RubyAlgorithms
   VERSION = "0.0.1.pre"
-  NAME = "Ruby Algorithms"
+  NAME = "RubyAlgorithms"
   SUMMARY = 'This gem includes the common data structures and algorithms.'
   DESCRIPTION = 'This gem includes the common data structures and algorithms.'
   AUTHORS = ['Uchenna F. Okoye']
