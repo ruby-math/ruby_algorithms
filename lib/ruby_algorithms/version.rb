@@ -6,6 +6,6 @@ module RubyAlgorithms
   AUTHORS = ['Uchenna F. Okoye']
   DATE = '2016-03-30'
   LICENSE = 'MIT'
-  HOMEPAGE = 'http://rubygems.org/gems/ruby_algorithms'
+  HOMEPAGE = 'https://github.com/ruby-math/RubyAlgorithms'
   EMAIL = 'uchennafokoye@gmail.com'
 end
