@@ -1,4 +1,4 @@
-require 'sorting_interface'
+require 'sorting_strategy'
 class HeapSort
   # Important Characteristics
   # 1. One of the best sorting methods being in-place and with no quadratic worst-case scenarios
@@ -34,7 +34,7 @@ class HeapSort
   #     worst = HeapSort::TIME_COMPLEXITY_WORST
   #     average = HeapSort::TIME_COMPLEXITY_AVERAGE
 
-  include SortingInterface
+  include SortingStrategy
 
   TIME_COMPLEXITY_WORST = "O(n log n)"
   TIME_COMPLEXITY_AVERAGE = "O(n log n)"

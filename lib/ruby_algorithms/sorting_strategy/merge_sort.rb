@@ -1,3 +1,5 @@
+require 'sorting_strategy'
+
 class MergeSort
 
   # Important Characteristics
@@ -43,6 +45,9 @@ class MergeSort
   SPACE_COMPLEXITY = "O(n)"
 
   attr_reader :array, :desc
+
+  include SortingStrategy
+
   def initialize array, desc=false
     unless array.is_a? Enumerable
       raise "Please provide an array or other Enumerable"

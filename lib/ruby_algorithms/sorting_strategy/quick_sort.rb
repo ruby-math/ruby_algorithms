@@ -1,4 +1,4 @@
-require 'sorting_interface'
+require 'sorting_strategy'
 class QuickSort
   # Important Characteristics
   # 1. Worst case is O(n ^ 2) but typically runs O (n log n)
@@ -41,7 +41,7 @@ class QuickSort
   #     worst = QuickSort::TIME_COMPLEXITY_WORST
   #     average = QuickSort::TIME_COMPLEXITY_AVERAGE
 
-  include SortingInterface
+  include SortingStrategy
 
   TIME_COMPLEXITY_WORST = "O(n^2)"
   TIME_COMPLEXITY_AVERAGE = "O(n log n)"
@@ -51,12 +51,7 @@ class QuickSort
   attr_reader :array, :desc
 
   def initialize array, desc=false
-    unless array.is_a? Enumerable
-      raise "Please provide an array or other Enumerable"
-    end
-    unless (array.all? {|item| item.is_a? Comparable})
-      raise "All objects must implement Comparable"
-    end
+    super
     @array = array
     @desc = desc
     self.sort

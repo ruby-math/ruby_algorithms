@@ -1,4 +1,4 @@
-require 'sorting_interface'
+require 'sorting_strategy'
 class SelectionSort
   # Important Characteristics
   # 1. Selects the smallest or largest and then swaps with element right after the last sorted item
@@ -33,19 +33,14 @@ class SelectionSort
   #     worst = SelectionSort::TIME_COMPLEXITY_WORST
   #     average = SelectionSort::TIME_COMPLEXITY_AVERAGE
 
-  include SortingInterface
+  include SortingStrategy
   TIME_COMPLEXITY_WORST = "O(n^2)"
   TIME_COMPLEXITY_AVERAGE = "O(n^2)"
   TIME_COMPLEXITY_BEST = "O(n^2)"
   attr_reader :array, :desc
 
   def initialize array, desc=false
-    unless array.is_a? Enumerable
-      raise "Please provide an array or other Enumerable"
-    end
-    unless (array.all? {|item| item.is_a? Comparable})
-      raise "All objects must implement Comparable"
-    end
+    super
     @array = array
     @desc = desc
     self.sort

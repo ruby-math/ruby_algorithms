@@ -1,5 +1,7 @@
-class InsertionSort
+require 'sorting_strategy'
 
+class InsertionSort
+  #
   # Important Characteristics
   # 1. It has one of the simplest implementations
   # 2. It is efficient for smaller data sets, but very inefficient for larger list
@@ -41,6 +43,7 @@ class InsertionSort
   TIME_COMPLEXITY_AVERAGE = "O(n^2)"
   TIME_COMPLEXITY_BEST = "O(n)"
   attr_reader :array, :desc
+  include SortingStrategy
 
   def initialize array, desc=false
     unless array.is_a? Enumerable

@@ -1,0 +1,2 @@
+module EdgeStrategy
+end

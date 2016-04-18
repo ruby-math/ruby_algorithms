@@ -45,7 +45,7 @@ class CountingSortTest < Minitest::Test
   end
 
   def test_that_class_implements_sorting_interface
-    assert(CountingSort.ancestors.include?(SortingInterface), msg="Does not implement sorting interface")
+    assert(CountingSort.ancestors.include?(SortingStrategy), msg="Does not implement sorting interface")
   end
 
   def random_parameterized_test_asc

@@ -1,4 +1,4 @@
-require 'sorting_interface'
+require 'sorting_strategy'
 class BubbleSort
   # Important Characteristics
   # 1. Compares all the elements one by one and sort them based on their values
@@ -39,19 +39,15 @@ class BubbleSort
   #     worst = BubbleSort::TIME_COMPLEXITY_WORST
   #     average = BubbleSort::TIME_COMPLEXITY_AVERAGE
 
-  include SortingInterface
+  include SortingStrategy
+
   TIME_COMPLEXITY_WORST = "O(n^2)"
   TIME_COMPLEXITY_AVERAGE = "O(n^2)"
   TIME_COMPLEXITY_BEST = "O(n)"
-  attr_reader :array, :desc
 
+  attr_reader :array, :desc
   def initialize array, desc=false
-    unless array.is_a? Enumerable
-      raise "Please provide an array or other Enumerable"
-    end
-    unless (array.all? {|item| item.is_a? Comparable})
-      raise "All objects must implement Comparable"
-    end
+    super
     @array = array
     @desc = desc
     self.sort

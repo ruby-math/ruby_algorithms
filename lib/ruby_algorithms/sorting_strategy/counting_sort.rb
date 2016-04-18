@@ -1,4 +1,5 @@
-require 'sorting_interface'
+require 'sorting_strategy'
+
 class CountingSort
   # Important Characteristics
   # 1. Must have values between (0, k) where k is larger than every value in the array
@@ -33,7 +34,7 @@ class CountingSort
   #     worst = CountingSort::TIME_COMPLEXITY_WORST
   #     average = CountingSort::TIME_COMPLEXITY_AVERAGE
 
-  include SortingInterface
+  include SortingStrategy
 
   TIME_COMPLEXITY_WORST = "O(n)"
   TIME_COMPLEXITY_AVERAGE = "O(n)"
@@ -45,12 +46,7 @@ class CountingSort
   # For more on k variable, read on counting sort
   # k indicates that every number in the container is in the range (0, k)
   def initialize array, k, desc=false
-    unless array.is_a? Enumerable
-      raise "Please provide an array or other Enumerable"
-    end
-    unless (array.all? {|item| item.is_a? Comparable})
-      raise "All objects must implement Comparable"
-    end
+    super(array, desc= desc)
     unless (array.all? {|item| item >= 0 && item < k})
       raise "All items in array must be greater than or equal to 0 and less than k"
     end
