@@ -1,21 +1,22 @@
-#Implements a simple graph
-#See SimpleGraph
 class Graph
   attr_reader :no_of_edges, :directed
 
-  def initialize directed=false
+  def initialize options={}
     @no_of_edges = 0
     @vertices = VertexList.new
     @adjacent_vertices = Hash.new
-    @directed = directed
+    @directed = options[:directed] || false
+    allowed_classes = options[:allowed_classes] || Object
+    allowed_classes.is_a?(Array) ? parse_allowed_classes(*allowed_classes) : parse_allowed_classes(allowed_classes)
   end
 
   def add_vertex v
-    added = @vertices.add?(v)
-    if added
+    validate_vertex v
+    was_added = @vertices.add?(v)
+    if was_added
       @adjacent_vertices[v] = EdgeList.new
     end
-    return added
+    return was_added
   end
 
   def add_vertex_list *vertices
@@ -48,7 +49,9 @@ class Graph
   end
 
   def degree v
-    validate_vertex v
+    unless @vertices.include? v
+      raise "Vertex not found"
+    end
     @adjacent_vertices[v].size
   end
 
@@ -66,12 +69,34 @@ class Graph
   end
 
   private
-  attr_reader :vertices, :adjacent_vertices
-  def validate_vertex v
+  attr_reader :vertices, :adjacent_vertices, :allowed_classes
+  def parse_allowed_classes *args
+    @allowed_classes = Set.new
+    args.each do |constant|
+      validate_class_or_module constant
+      @allowed_classes.add constant
+    end
+  end
+
+  def validate_vertex_exists v
     unless @vertices.include? v
       raise "Vertex not found"
     end
   end
+
+  def validate_vertex v
+    ancestors = Set.new(v.class.ancestors)
+    unless allowed_classes.intersect? ancestors
+      raise "#{v} is not an instance of an allowed class #{allowed_classes.inspect}"
+    end
+  end
+
+  def validate_class_or_module constant
+    unless constant.is_a?(Module) || constant.is_a?(Class)
+      raise "Please provide a module or class"
+    end
+  end
+
   def is_connected v, w
     @adjacent_vertices[v].include?(w) || @adjacent_vertices[w].include?(v)
   end
@@ -82,5 +107,6 @@ class Graph
   end
 end
 
+#SimpleGraph implements a uni or bigraph with no weights
 class SimpleGraph < Graph
 end
