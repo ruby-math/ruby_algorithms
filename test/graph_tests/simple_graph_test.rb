@@ -17,7 +17,28 @@ class SimpleGraphTest < Minitest::Test
   end
 
 
-  def test_that_you_can_restrict_to_multiple_classes_with_array
+  def test_that_nondirected_graph_is_two_way
+      non_directed_graph = Graph.new :directed => false
+      non_directed_graph.add_edge @f1, @f2
+      assert(non_directed_graph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
+      assert(non_directed_graph.connected_vertices(@f2), Graph::EdgeList.new([@f1]))
+  end
+
+  def test_that_nondirected_graph_is_the_default
+    non_directed_graph = Graph.new
+    non_directed_graph.add_edge @f1, @f2
+    assert(non_directed_graph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
+    assert(non_directed_graph.connected_vertices(@f2), Graph::EdgeList.new([@f1]))
+  end
+
+  def test_that_directed_graph_is_one_way
+    digraph = Graph.new :directed=> true
+    digraph.add_edge @f1, @f2
+    assert(digraph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
+    assert(digraph.connected_vertices(@f2), Graph::EdgeList.new)
+  end
+
+  def test_that_you_can_restrict_graph_to_multiple_classes_with_array
     graph_of_multiple_classes = SimpleGraph.new :allowed_classes => [Friend, Student]
     assert graph_of_multiple_classes.add_vertex @f1
     assert graph_of_multiple_classes.add_vertex @s1

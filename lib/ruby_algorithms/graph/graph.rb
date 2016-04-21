@@ -27,6 +27,10 @@ class Graph
     end
   end
 
+  def is_connected v, w
+    @adjacent_vertices[v].include?(w) || @adjacent_vertices[w].include?(v)
+  end
+
   def add_edge v, w
     add_vertex v
     add_vertex w
@@ -97,10 +101,6 @@ class Graph
     end
   end
 
-  def is_connected v, w
-    @adjacent_vertices[v].include?(w) || @adjacent_vertices[w].include?(v)
-  end
-
   class EdgeList < Set
   end
   class VertexList < Set
@@ -108,5 +108,11 @@ class Graph
 end
 
 #SimpleGraph implements a uni or bigraph with no weights
+# You can restrict classes
+# Example:
+#  @graph_of_friends = SimpleGraph.new :allowed_classes=> Friend
+# OR
+#   graph_of_multiple_classes = SimpleGraph.new :allowed_classes => [Friend, Student]
+# Default allowed_classes is Object, so all objects will be allowed
 class SimpleGraph < Graph
 end
