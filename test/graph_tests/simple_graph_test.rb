@@ -1,10 +1,11 @@
 require 'test_helper'
-require 'graph'
+require 'simple_graph'
+require 'digraph'
 
 class SimpleGraphTest < Minitest::Test
 
   def setup
-    @g = SimpleGraph.new
+    @undirected_graph = SimpleGraph.new
     @graph_of_friends = SimpleGraph.new :allowed_classes=> Friend
     @f1 = Friend.new "Jane"
     @f2 = Friend.new "Hillary"
@@ -18,24 +19,36 @@ class SimpleGraphTest < Minitest::Test
 
 
   def test_that_nondirected_graph_is_two_way
-      non_directed_graph = Graph.new :directed => false
+      non_directed_graph = SimpleGraph.new :directed => false
       non_directed_graph.add_edge @f1, @f2
-      assert(non_directed_graph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
-      assert(non_directed_graph.connected_vertices(@f2), Graph::EdgeList.new([@f1]))
+      assert(non_directed_graph.is_dual_connected? @f1, @f2)
   end
 
   def test_that_nondirected_graph_is_the_default
-    non_directed_graph = Graph.new
+    non_directed_graph = SimpleGraph.new
     non_directed_graph.add_edge @f1, @f2
-    assert(non_directed_graph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
-    assert(non_directed_graph.connected_vertices(@f2), Graph::EdgeList.new([@f1]))
+    assert(non_directed_graph.is_dual_connected? @f1, @f2)
+  end
+
+  def test_that_digraph_produces_a_directed_graph
+    digraph = Digraph.new
+    digraph.add_edge @f1, @f2
+    assert(digraph.is_connected? @f1 ,@f2)
+    assert(!digraph.is_connected?(@f2, @f1))
+  end
+
+  def test_that_digraph_is_always_directed_even_with_optional_parameters
+    digraph = Digraph.new :directed => false
+    digraph.add_edge @f1, @f2
+    assert(digraph.is_connected? @f1 ,@f2)
+    assert(!digraph.is_connected?(@f2, @f1))
   end
 
   def test_that_directed_graph_is_one_way
-    digraph = Graph.new :directed=> true
+    digraph = SimpleGraph.new :directed=> true
     digraph.add_edge @f1, @f2
-    assert(digraph.connected_vertices(@f1), Graph::EdgeList.new([@f2]))
-    assert(digraph.connected_vertices(@f2), Graph::EdgeList.new)
+    assert(digraph.is_connected? @f1 ,@f2)
+    assert(!digraph.is_connected?(@f2, @f1))
   end
 
   def test_that_you_can_restrict_graph_to_multiple_classes_with_array
@@ -59,38 +72,17 @@ class SimpleGraphTest < Minitest::Test
 
   def test_that_you_can_add_non_existing_edge_using_add_edge
     @non_existing_edge = Friend.new "Mark"
-    @g.add_edge @non_existing_edge, @f1
-    assert @g.vertex_list.include?(@non_existing_edge)
+    @undirected_graph.add_edge @non_existing_edge, @f1
+    assert @undirected_graph.has_vertex? (@non_existing_edge)
   end
 
   def test_that_you_get_true_when_you_add_vertex
-    assert @g.add_vertex @f1
+    assert @undirected_graph.add_vertex @f1
   end
 
   def test_that_you_get_nil_or_false_when_you_add_vertex_that_already_exists
-    @g.add_vertex @f1
-    assert !(@g.add_vertex @f1)
-  end
-
-  def test_that_vertex_is_not_overwritten_if_exists_aka_connected_vertices_stays_the_same
-    @g.add_edge @f1, @f2
-    connected_vertices = @g.connected_vertices @f1
-    @g.add_vertex @f1
-    assert_equal @g.connected_vertices(@f1), connected_vertices
-  end
-
-
-  def test_that_outsider_cannot_change_vertex_list_by_accessing_vertex_list_accessor
-    @g.add_vertex_list @f1, @f2
-    @g.vertex_list.delete @f1
-    assert @g.vertex_list.include? @f1
-  end
-
-  def test_that_outsider_cannot_change_edge_list_by_accessing_edge_list_accessor
-    @g.add_vertex_list @f1, @f2
-    @g.add_edge @f1, @f2
-    @g.connected_vertices(@f1).delete @f1
-    assert @g.vertex_list.include? @f1
+    @undirected_graph.add_vertex @f1
+    assert !(@undirected_graph.add_vertex @f1)
   end
 
 end

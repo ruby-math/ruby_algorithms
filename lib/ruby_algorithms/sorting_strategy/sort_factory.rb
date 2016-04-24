@@ -1,0 +1,2 @@
+class SortFactory
+end

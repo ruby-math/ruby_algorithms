@@ -1,11 +1,13 @@
 class Graph
-  attr_reader :no_of_edges, :directed
+  attr_reader :no_of_edges
 
   def initialize options={}
     @no_of_edges = 0
     @vertices = VertexList.new
     @adjacent_vertices = Hash.new
-    @directed = options[:directed] || false
+    @directed = options[:directed]
+    @weighted = options[:weighted]
+    @type_of_edge = weighted ? WeightedEdgeList : EdgeList
     allowed_classes = options[:allowed_classes] || Object
     allowed_classes.is_a?(Array) ? parse_allowed_classes(*allowed_classes) : parse_allowed_classes(allowed_classes)
   end
@@ -14,12 +16,12 @@ class Graph
     validate_vertex v
     was_added = @vertices.add?(v)
     if was_added
-      @adjacent_vertices[v] = EdgeList.new
+      @adjacent_vertices[v] = type_of_edge.new
     end
     return was_added
   end
 
-  def add_vertex_list *vertices
+  def add_vertices *vertices
     vertices.each do |v|
       unless add_vertex(v)
         "Failed to add #{v}"
@@ -27,29 +29,30 @@ class Graph
     end
   end
 
-  def is_connected v, w
-    @adjacent_vertices[v].include?(w) || @adjacent_vertices[w].include?(v)
+  def is_directed?
+    @directed
   end
 
   def add_edge v, w
     add_vertex v
     add_vertex w
-    unless is_connected v, w
-      @adjacent_vertices[v].add?  w
-      unless @directed
-        @adjacent_vertices[w].add v
-      end
-      @no_of_edges += 1
-      return true
+    if @directed
+      add_edge_directed v, w
+    else
+      add_edge_undirected v, w
     end
   end
 
-  def vertex_list
-    VertexList.new @vertices
+  def has_vertex? v
+    @vertices.include? v
   end
 
-  def connected_vertices v
-    EdgeList.new @adjacent_vertices[v]
+  def is_dual_connected? v, w
+    @adjacent_vertices[v].include?(w) && @adjacent_vertices[w].include?(v)
+  end
+
+  def is_connected? v, w
+    @adjacent_vertices[v].include?(w)
   end
 
   def degree v
@@ -73,12 +76,29 @@ class Graph
   end
 
   private
-  attr_reader :vertices, :adjacent_vertices, :allowed_classes
+  attr_reader :vertices, :adjacent_vertices, :allowed_classes,  :directed, :weighted, :type_of_edge
   def parse_allowed_classes *args
     @allowed_classes = Set.new
     args.each do |constant|
       validate_class_or_module constant
       @allowed_classes.add constant
+    end
+  end
+
+  def add_edge_directed v, w
+    unless is_connected? v, w
+      @adjacent_vertices[v].add  w
+      @no_of_edges += 1
+      return true
+    end
+  end
+
+  def add_edge_undirected v, w
+    unless is_dual_connected? v, w
+      @adjacent_vertices[v].add  w
+      @adjacent_vertices[w].add v
+      @no_of_edges += 1
+      return true
     end
   end
 
@@ -103,16 +123,43 @@ class Graph
 
   class EdgeList < Set
   end
+
+  class WeightedEdgeList < EdgeList
+    def initialize
+      @weights_to = Hash.new
+      super
+    end
+
+    def add? o, options={}
+      if include?(o)
+        nil
+      else
+        add(o, options)
+      end
+    end
+
+    def add o, options={}
+      super o
+      weight = options[:weight] || 0
+      weights_to[o] = weight
+    end
+
+    def weight node
+      validate_item node
+      @weights_to[node]
+    end
+
+    private
+    attr_reader :weights_to
+    def validate_item node
+      unless @weights_to.include? node
+        raise "EdgeNode not found"
+      end
+    end
+  end
+
+
   class VertexList < Set
   end
-end
 
-#SimpleGraph implements a uni or bigraph with no weights
-# You can restrict classes
-# Example:
-#  @graph_of_friends = SimpleGraph.new :allowed_classes=> Friend
-# OR
-#   graph_of_multiple_classes = SimpleGraph.new :allowed_classes => [Friend, Student]
-# Default allowed_classes is Object, so all objects will be allowed
-class SimpleGraph < Graph
 end
