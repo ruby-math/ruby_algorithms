@@ -7,6 +7,7 @@ class SimpleGraphTest < Minitest::Test
   def setup
     @undirected_graph = SimpleGraph.new
     @graph_of_friends = SimpleGraph.new :allowed_classes=> Friend
+    @self_loop_graph = SimpleGraph.new :allowed_classes => Friend, :allow_self_loops => true
     @f1 = Friend.new "Jane"
     @f2 = Friend.new "Hillary"
     @s1 = Student.new "Female"
@@ -83,6 +84,26 @@ class SimpleGraphTest < Minitest::Test
   def test_that_you_get_nil_or_false_when_you_add_vertex_that_already_exists
     @undirected_graph.add_vertex @f1
     assert !(@undirected_graph.add_vertex @f1)
+  end
+
+
+  def test_that_no_self_loops_allowed_by_default
+    begin
+      @graph_of_friends.add_vertex @f1
+      @graph_of_friends.add_edge @f1, @f1
+      fail("Expected error to be thrown")
+    rescue
+      assert(!@graph_of_friends.is_connected?(@f1 ,@f1))
+    end
+  end
+
+  def test_that_self_loops_allowed_if_specified
+    begin
+      @self_loop_graph.add_edge @f1, @f1
+      assert(@self_loop_graph.is_connected? @f1 ,@f1)
+    rescue
+      fail("Error should not have been thrown")
+    end
   end
 
 end

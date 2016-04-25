@@ -7,6 +7,7 @@ class WeightedGraph < Graph
   end
 
   def add_edge v, w, weight=0
+    validate_if_self_loop v, w
     add_vertex v
     add_vertex w
     if @directed

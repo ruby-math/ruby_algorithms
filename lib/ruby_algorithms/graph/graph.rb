@@ -5,8 +5,9 @@ class Graph
     @no_of_edges = 0
     @vertices = VertexList.new
     @adjacent_vertices = Hash.new
-    @directed = options[:directed]
-    @weighted = options[:weighted]
+    @directed = !!options[:directed]
+    @weighted = !!options[:weighted]
+    @disallow_self_loops = !options[:allow_self_loops]
     @type_of_edge = weighted ? WeightedEdgeList : EdgeList
     allowed_classes = options[:allowed_classes] || Object
     allowed_classes.is_a?(Array) ? parse_allowed_classes(*allowed_classes) : parse_allowed_classes(allowed_classes)
@@ -34,6 +35,7 @@ class Graph
   end
 
   def add_edge v, w
+    validate_if_self_loop v, w
     add_vertex v
     add_vertex w
     if @directed
@@ -77,6 +79,7 @@ class Graph
 
   private
   attr_reader :vertices, :adjacent_vertices, :allowed_classes,  :directed, :weighted, :type_of_edge
+  attr_reader :disallow_self_loops
   def parse_allowed_classes *args
     @allowed_classes = Set.new
     args.each do |constant|
@@ -112,6 +115,12 @@ class Graph
     ancestors = Set.new(v.class.ancestors)
     unless allowed_classes.intersect? ancestors
       raise "#{v} is not an instance of an allowed class #{allowed_classes.inspect}"
+    end
+  end
+
+  def validate_if_self_loop v, w
+    if v.eql?(w) && disallow_self_loops
+      raise "Self Loops not allowed"
     end
   end
 
