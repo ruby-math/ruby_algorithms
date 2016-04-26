@@ -1,9 +1,10 @@
 class Graph
+  include Enumerable
   attr_reader :no_of_edges
 
   def initialize options={}
     @no_of_edges = 0
-    @vertices = VertexList.new
+    @set_of_vertices = VertexList.new
     @adjacent_vertices = Hash.new
     @directed = !!options[:directed]
     @weighted = !!options[:weighted]
@@ -15,7 +16,7 @@ class Graph
 
   def add_vertex v
     validate_vertex v
-    was_added = @vertices.add?(v)
+    was_added = @set_of_vertices.add?(v)
     if was_added
       @adjacent_vertices[v] = type_of_edge.new
     end
@@ -34,6 +35,15 @@ class Graph
     @directed
   end
 
+  def vertices
+    VertexList.new @set_of_vertices
+  end
+
+  def adj v
+    validate_vertex_exists v
+    @type_of_edge.new @adjacent_vertices[v]
+  end
+
   def add_edge v, w
     validate_if_self_loop v, w
     add_vertex v
@@ -46,7 +56,7 @@ class Graph
   end
 
   def has_vertex? v
-    @vertices.include? v
+    @set_of_vertices.include? v
   end
 
   def is_dual_connected? v, w
@@ -58,7 +68,7 @@ class Graph
   end
 
   def degree v
-    unless @vertices.include? v
+    unless @set_of_vertices.include? v
       raise "Vertex not found"
     end
     @adjacent_vertices[v].size
@@ -66,7 +76,7 @@ class Graph
 
   def to_s
     s = "#{no_of_vertices} vertices, #{no_of_edges} edges\n"
-    @vertices.each do |v|
+    @set_of_vertices.each do |v|
       s += "Vertex: #{v}\n"
       s += "Adjacency: #{@adjacent_vertices}\n"
     end
@@ -74,11 +84,11 @@ class Graph
   end
 
   def no_of_vertices
-    @vertices.size
+    @set_of_vertices.size
   end
 
   private
-  attr_reader :vertices, :adjacent_vertices, :allowed_classes,  :directed, :weighted, :type_of_edge
+  attr_reader :set_of_vertices, :adjacent_vertices, :allowed_classes, :directed, :weighted, :type_of_edge
   attr_reader :disallow_self_loops
   def parse_allowed_classes *args
     @allowed_classes = Set.new
@@ -106,7 +116,7 @@ class Graph
   end
 
   def validate_vertex_exists v
-    unless @vertices.include? v
+    unless @set_of_vertices.include? v
       raise "Vertex not found"
     end
   end

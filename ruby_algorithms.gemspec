@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|s|features)/}) }
   s.bindir        = "exe"
   s.executables   = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  s.require_paths = ["lib", "lib/ruby_algorithms", "lib/ruby_algorithms/sorting_strategy", "lib/ruby_algorithms/graph"]
+  s.require_paths = `find lib -type d`.split("\n")
 
   s.add_development_dependency "bundler", "~> 1.10"
   s.add_development_dependency "rake", "~> 10.0"

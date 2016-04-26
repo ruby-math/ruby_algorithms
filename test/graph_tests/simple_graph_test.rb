@@ -81,29 +81,17 @@ class SimpleGraphTest < Minitest::Test
     assert @undirected_graph.add_vertex @f1
   end
 
-  def test_that_you_get_nil_or_false_when_you_add_vertex_that_already_exists
-    @undirected_graph.add_vertex @f1
-    assert !(@undirected_graph.add_vertex @f1)
+  def test_that_outsider_cannot_change_vertex_list_by_accessing_vertex_list_accessor
+    @undirected_graph.add_vertices @f1, @f2
+    @undirected_graph.vertices.delete @f1
+    assert @undirected_graph.has_vertex? @f1
   end
 
-
-  def test_that_no_self_loops_allowed_by_default
-    begin
-      @graph_of_friends.add_vertex @f1
-      @graph_of_friends.add_edge @f1, @f1
-      fail("Expected error to be thrown")
-    rescue
-      assert(!@graph_of_friends.is_connected?(@f1 ,@f1))
-    end
-  end
-
-  def test_that_self_loops_allowed_if_specified
-    begin
-      @self_loop_graph.add_edge @f1, @f1
-      assert(@self_loop_graph.is_connected? @f1 ,@f1)
-    rescue
-      fail("Error should not have been thrown")
-    end
+  def test_that_outsider_cannot_change_edge_list_by_accessing_edge_list_accessor
+    @undirected_graph.add_vertices @f1, @f2
+    @undirected_graph.add_edge @f1, @f2
+    @undirected_graph.adj(@f1).delete @f2
+    assert @undirected_graph.is_connected? @f1, @f2
   end
 
 end
