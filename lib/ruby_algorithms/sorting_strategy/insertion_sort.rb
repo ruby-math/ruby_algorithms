@@ -1,4 +1,5 @@
 require 'sorting_strategy'
+require 'byebug'
 
 class InsertionSort
   #
@@ -75,20 +76,42 @@ class InsertionSort
   # You iterate backwards comparing new pointer (i) to all other array points (j)
   # If it is less than/greater than, then place it in its rightful position
   # For descending order, just do the opposite.
+  # def insertion_sort
+  #   array = @array
+  #   for i in 1...array.length
+  #     current_no = array[i]
+  #     j = i - 1
+  #     while j >= 0
+  #       comparison = is_desc? ? (current_no > array[j]) : (current_no < array[j])
+  #       unless comparison
+  #         break
+  #       end
+  #       array[j+1] = array[j]
+  #       j = j - 1
+  #     end
+  #     array[j+1] = current_no
+  #   end
+  # end
+
+
   def insertion_sort
     array = @array
     for i in 1...array.length
-      current_no = array[i]
-      j = i - 1
-      while j >= 0
-        comparison = is_desc? ? (current_no > array[j]) : (current_no < array[j])
-        unless comparison
-          break
-        end
-        array[j+1] = array[j]
-        j = j - 1
+      temp = array[i]
+      j = i
+      comparison = is_desc? ? :> : :<
+      x = i - 1
+      while x >= 0
+        if temp.send(comparison, array[x])
+            array[x + 1] = array[x]
+            j = x
+            x -= 1
+          else
+            x -= 1
+            break
+          end
       end
-      array[j+1] = current_no
+      array[j] = temp
     end
   end
 

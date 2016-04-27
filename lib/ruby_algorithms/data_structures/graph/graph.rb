@@ -169,12 +169,13 @@ class Graph
     end
 
     private
-    attr_reader :weights_to
+    attr_reader :weights_to, :edges
     def validate_item node
       unless @weights_to.include? node
         raise "EdgeNode not found"
       end
     end
+
   end
 
 

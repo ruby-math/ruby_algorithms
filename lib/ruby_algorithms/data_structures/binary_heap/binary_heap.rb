@@ -1,9 +1,12 @@
 require 'byebug'
 module BinaryHeap
 
-
   def is_min_heap?
     @is_min_heap
+  end
+
+  def is_max_heap?
+    !@is_min_heap
   end
 
   private
