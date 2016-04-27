@@ -1,5 +1,4 @@
 require 'test_helper'
-
 require 'priority_queue'
 
 class PriorityQueueTest < Minitest::Test
