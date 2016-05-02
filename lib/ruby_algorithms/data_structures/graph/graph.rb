@@ -1,3 +1,4 @@
+require 'byebug'
 class Graph
   include Enumerable
   attr_reader :no_of_edges
@@ -36,12 +37,12 @@ class Graph
   end
 
   def vertices
-    VertexList.new @set_of_vertices
+    @set_of_vertices.clone
   end
 
   def adj v
     validate_vertex_exists v
-    @type_of_edge.new @adjacent_vertices[v]
+    @adjacent_vertices[v].clone
   end
 
   def add_edge v, w
@@ -144,9 +145,9 @@ class Graph
   end
 
   class WeightedEdgeList < EdgeList
-    def initialize
-      @weights_to = Hash.new
+    def initialize(enum = nil, &block)
       super
+      @weights_to = Hash.new
     end
 
     def add? o, options={}
@@ -159,14 +160,18 @@ class Graph
 
     def add o, options={}
       super o
-      weight = options[:weight] || 0
-      weights_to[o] = weight
+      unless weights_to[o]
+        weight = options[:weight] || 0
+        weights_to[o] = weight
+      # weights_to[o].freeze
+      end
     end
 
     def weight node
       validate_item node
       @weights_to[node]
     end
+
 
     private
     attr_reader :weights_to, :edges
@@ -176,7 +181,9 @@ class Graph
       end
     end
 
+
   end
+
 
 
   class VertexList < Set

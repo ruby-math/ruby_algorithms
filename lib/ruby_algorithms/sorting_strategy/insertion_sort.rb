@@ -65,7 +65,7 @@ class InsertionSort
 
   protected
   def sort
-    insertion_sort
+    insertion_sort @array, @array.size - 1
   end
 
   def is_desc?
@@ -94,13 +94,14 @@ class InsertionSort
   # end
 
 
-  def insertion_sort
-    array = @array
-    for i in 1...array.length
-      temp = array[i]
-      j = i
+  def insertion_sort array, n
+      if n > 1
+        insertion_sort array, n -1
+      end
+      temp = array[n]
+      j = n
       comparison = is_desc? ? :> : :<
-      x = i - 1
+      x = n - 1
       while x >= 0
         if temp.send(comparison, array[x])
             array[x + 1] = array[x]
@@ -113,6 +114,5 @@ class InsertionSort
       end
       array[j] = temp
     end
-  end
 
 end
