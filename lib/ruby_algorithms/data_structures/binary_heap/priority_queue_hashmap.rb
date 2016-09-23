@@ -1,46 +1,35 @@
 require 'binary_heap'
-class PriorityQueue
+class PriorityQueueHashMap
   include BinaryHeap
 
   def initialize max_heap=false
     @elements = []
+    @index = {}
     @is_min_heap = !max_heap
   end
 
   def pop
-    @elements.shift
+    min_or_max = @elements.shift.key
+    @index[min_or_max] = nil
+    min_or_max
   end
 
-  # I need to be able to keep track of the elements
-  # While their positions change, we still need to be able to access the actual keys
-  # If someone gives us a bunch of numbers, that's fair. We can just use the index.
-  # However
-
-
-  # How can I decrease a key
-  # In the priority queue
-  # Priority Queue.decrease key (Object)
-  # If Object is a primitive or a string, not helpful
-  # We can also give them the index of an object
-  # Priority Queue . get Index (Object)
-  # We can have a hashmap for that object
-  # But that assumes that we won't have duplicate objects
-  # Only solution so far, is just to reheapifyu
-
-
-
-  def <<(element)
-    @elements << element
-    bubble_up @elements, @elements.size - 1
+  def add (key, value)
+    @elements << KeyValue.new(key, value)
+    index = @elements.size - 1
+    @index[key] = index
+    bubble_up @elements, index
   end
 
-  def updateKey(index, newValue)
+  def updateKey(key, newValue)
+    index = @index[key]
+    return if index.nil?
     return if index >= @elements.size
     return if index < 0
-    old = @elements[index]
-    @elements[index] = newValue
 
-    # If min heap and new value is less than old, bubble up, else bubble down
+    old = @elements[index].value
+    @elements[index].update_value(newValue)
+
     if (is_min_heap?)
       if (newValue < old)
         bubble_up @elements, index
@@ -49,7 +38,6 @@ class PriorityQueue
       end
     end
 
-    # If max heap and new value is greater than old, bubble up, else bubble down
     if (is_max_heap?)
       if (newValue > old)
         bubble_up @elements, index
@@ -73,10 +61,12 @@ class PriorityQueue
       end
       if last_index == smallest
         @elements.pop
+        @index[last_index] = nil
       else
         last_item = @elements.pop
         smallest_item = @elements.pop
         @elements << last_item
+        @index[smallest] = nil
         smallest_item
       end
     end
@@ -95,10 +85,12 @@ class PriorityQueue
       end
       if last_index == largest
         @elements.pop
+        @index[last_index] = nil
       else
         last_item = @elements.pop
         largest_item = @elements.pop
         @elements << last_item
+        @index[largest] = nil
         largest_item
       end
     end
@@ -111,8 +103,46 @@ class PriorityQueue
   private
   attr_reader :elements, :is_min_heap
 
-  def swap array, i, j
-    array[i], array[j] = array[j], array[i]
+  def swap elements, i, j
+    elements[i], elements[j] = elements[j], elements[i]
+    @index[i], @index[j] = j, i
+  end
+
+  class KeyValue
+    include Comparable
+
+    attr_reader :key, :value
+
+    def initialize key, value
+      validate_value value
+      @key = key
+      @value = value
+    end
+
+    def update_value new_value
+      validate_value new_value
+      @value = new_value
+    end
+
+
+    def <=>(other)
+      validate_other other
+      @value <=> other.value
+    end
+
+    private
+    def validate_other other
+      unless other.is_a? KeyValue
+        raise "Please provide KeyValue class"
+      end
+    end
+
+    def validate_value value
+      unless value.is_a?(Integer) || value.is_a?(Float)
+        raise "Value must be a number"
+      end
+    end
+
   end
 
 end

@@ -43,9 +43,39 @@ module BinaryHeap
   end
 
 
-  def bubble_down (array, i)
-    heapify array, i, array.size
+  def bubble_down(array, index)
+    left = 2 * index + 1
+    right = 2 * index + 2
 
+    heapsize = array.size
+
+    #return if we reach the last element
+    return if index >= heapsize - 1
+
+    #comparison, if min heap, then child index is greater than, if max heap, then child index is less than
+    comparison = is_min_heap? ? :> : :<
+    # or if the parent is already greater/less than (in min or max) than the child
+    return if array[left].send(comparison, array[index]) && array[right].send(comparison, array[index])
+
+    # largest if max_heap
+    # smallest if min_heap
+    priority = index
+
+    # comparison, now if min heap, then find smallest priority using < else find largest priority using >
+    comparison = is_min_heap? ? :<= : :>=
+    if (left < heapsize && array[left].send(comparison, array[index]))
+      priority = left
+    end
+
+    if (right < heapsize && array[right].send(comparison, array[priority]))
+      priority = right
+    end
+
+    #and keep bubbling down
+    if priority != index
+      swap array, index, priority
+      bubble_down(array, priority)
+    end
   end
 
   def bubble_up (array, index)
@@ -55,7 +85,7 @@ module BinaryHeap
     return if index <= 0
     return if index >= array.size
 
-    parent_should_be_comparison = is_min_heap? ? :< : :>
+    parent_should_be_comparison = is_min_heap? ? :<= : :>=
     # or if the parent is already greater/less than (in min or max) than the child
     return if array[parent_index].send(parent_should_be_comparison, array[index])
 
